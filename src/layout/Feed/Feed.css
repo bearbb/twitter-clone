@@ -1,0 +1,24 @@
+.feed {
+  flex: 0.4;
+  border-right: 1px solid rgb(0, 0, 0, 0.25);
+  min-width: fit-content;
+  overflow-y: scroll;
+}
+.feed__header {
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 100;
+  /* border-top: 1px solid rgb(0, 0, 0, 0.25); */
+  border-bottom: 1px solid rgb(0, 0, 0, 0.25);
+  padding: 15px 20px;
+}
+/* Hide scroll bar from chrome, safari, opera */
+.feed::-webkit-scrollbar {
+  display: none;
+}
+/* Hide scroll bar from IE, edge, firefox */
+.feed {
+  -ms-overflow-style: none; /*IE and edge*/
+  scrollbar-width: none; /*Firefox*/
+}
