@@ -1,7 +1,8 @@
 .feed {
-  flex: 0.4;
+  flex: 0.5;
   border-right: 1px solid rgb(0, 0, 0, 0.25);
-  min-width: fit-content;
+  /* min-width: fit-content; */
+  max-width: 598px;
   overflow-y: scroll;
 }
 .feed__header {
