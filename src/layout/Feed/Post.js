@@ -17,7 +17,7 @@ function Post({ displayName, userName, verified, text, image, avatar }) {
           <div className="post__headerText">
             <h3>
               BearBB{" "}
-              <span>
+              <span className="post__headerSpecial">
                 <VerifiedUserIcon className="post__badge" />
                 @bearbb
               </span>

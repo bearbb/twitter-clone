@@ -20,6 +20,13 @@ function Feed() {
       </div>
       <TweetBox />
       <Post />
+      <Post />
+      <Post />
+      <Post />
+      <Post />
+      <Post />
+      <Post />
+      <Post />
     </div>
   );
 }
