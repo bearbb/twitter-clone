@@ -6,38 +6,29 @@ import ChatBubbleIcon from "@material-ui/icons/ChatBubbleOutline";
 import RepeatIcon from "@material-ui/icons/Repeat";
 import FavoriteIcon from "@material-ui/icons/FavoriteBorder";
 import PublishIcon from "@material-ui/icons/Publish";
+
 function Post({ displayName, userName, verified, text, image, avatar }) {
   return (
     <div className="post">
       <div className="post__avatar">
-        <Avatar src="https://images-na.ssl-images-amazon.com/images/I/51AG6B5vv7L._AC_SX425_.jpg"></Avatar>
+        <Avatar src={`${avatar}`}></Avatar>
       </div>
       <div className="post__body">
         <div className="post__header">
           <div className="post__headerText">
             <h3>
-              BearBB{" "}
+              {displayName}{" "}
               <span className="post__headerSpecial">
-                <VerifiedUserIcon className="post__badge" />
-                @bearbb
+                {verified && <VerifiedUserIcon className="post__badge" />}
+                {`@${userName}`}
               </span>
             </h3>
           </div>
           <div className="post__headerDescription">
-            <p>
-              {" "}
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              {/* Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae
-              blanditiis ipsa consectetur rerum unde. Dicta, iure. Repellat
-              libero provident mollitia veritatis, deleniti, at quaerat fuga
-              nisi animi, a possimus sequi! */}
-            </p>
+            <p>{text}</p>
           </div>
         </div>
-        <img
-          src="https://media.giphy.com/media/l0HlNkEPRnXVeEE2A/giphy.gif"
-          alt="Gif"
-        />
+        <img src={`${image}`} alt="" />
         <div className="post__footer">
           <ChatBubbleIcon fontSize="small" />
           <RepeatIcon fontSize="small" />
