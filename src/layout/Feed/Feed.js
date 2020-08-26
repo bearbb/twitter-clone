@@ -3,12 +3,19 @@ import "./Feed.css";
 import TweetBox from "./TweetBox";
 import Post from "./Post";
 import db from "../../firebase";
+import axios from "axios";
 function Feed() {
   const [posts, setPosts] = useState([]);
+  const [fetch, setFetch] = useState(false);
   useEffect(() => {
-    db.collection("posts").onSnapshot((snapshot) => {
-      setPosts(snapshot.docs.map((doc) => doc.data()));
-    });
+    //TODO: add a fucking header with authentication bearer so it can access to the database
+    axios
+      .get("/home")
+      .then((res) => {
+        setPosts(res.data);
+        // console.log(res.data);
+      })
+      .catch((err) => console.log(err));
   }, []);
   return (
     <div className="feed">

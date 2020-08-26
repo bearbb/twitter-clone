@@ -15,6 +15,7 @@ function TweetBox() {
         "https://ih1.redbubble.net/image.973946953.0625/flat,750x1000,075,f.jpg",
       text: tweetMessage,
       image: tweetImage,
+      createAt: `${new Date().toISOString()}`,
     });
     setTweetImage("");
     setTweetMessage("");
