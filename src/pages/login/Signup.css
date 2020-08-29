@@ -1,0 +1,57 @@
+.signup {
+  height: 650px;
+  width: auto;
+  padding: 40px;
+  border: 1px solid black;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.signup__twitterIcon {
+  color: #3f51b5;
+  font-size: 50px !important;
+}
+.signup__form {
+  display: flex;
+  flex: 0.96;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.signupForm__header {
+  align-self: flex-start;
+  border-radius: 15px;
+}
+.signupForm__input {
+  height: auto;
+  width: 540px;
+  margin: 10px;
+  border: none;
+  border-bottom: 1px solid var(--twitter-color);
+  font-size: 25px;
+  background-color: #f5f8fa;
+}
+.signupFormInput__container > input:focus {
+  outline: none;
+}
+.signupFormInput__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-color: #f5f8fa;
+  border-radius: 7px;
+  padding: 2px;
+}
+.signupFormInput__description {
+  margin-left: 15px;
+}
+.signup__button {
+  margin-top: 40px !important;
+  height: 50px !important;
+  width: 290px;
+  border-radius: 9px;
+}
+
+/* when wrong #e0245e 2px */
