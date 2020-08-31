@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TwitterIcon from "@material-ui/icons/Twitter";
 import { Button } from "@material-ui/core";
+import SignupFormInput from "./SignupFormInput";
 import "./SignupNLogin.css";
 import axios from "axios";
+import { FormContext } from "./FormContext";
 axios.defaults.baseURL =
   "https://asia-east2-twitter-clone-53ba9.cloudfunctions.net/api";
 function Signup() {
@@ -11,6 +13,7 @@ function Signup() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState({});
   const signupSubmit = async () => {
     try {
       const res = await axios.post("/signup", {
@@ -22,77 +25,80 @@ function Signup() {
         avatar: "",
       });
       console.log(res.data);
-    } catch (error) {
-      console.log(error.response.data);
+      //if there is no error => use react router dom to push to home
+    } catch (axiosError) {
+      //if there is error => show error base on response in description
+      console.log(axiosError.response.data.error);
+      setError(axiosError.response.data.error);
     }
   };
+  useEffect(() => {
+    console.log(error);
+  }, [error]);
+
   return (
     <div className="signup">
       <TwitterIcon className="signup__twitterIcon twitterIcon"></TwitterIcon>
       <form className="signup__form">
         <h2 className="signupForm__header">Create your account</h2>
+        {/* UseContext to change email state on the higher components */}
+        <FormContext.Provider
+          value={{
+            field: email,
+            errorCode: "email",
+            setField: setEmail,
+            error,
+            description: "Email",
+          }}
+        >
+          <SignupFormInput />
+        </FormContext.Provider>
 
-        <div className="signupFormInput__container">
-          <span className="signupFormInput__description">Email</span>
-          <input
-            type="email"
-            className="signupForm__input email-input"
-            value={email}
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
-          />
-        </div>
+        <FormContext.Provider
+          value={{
+            field: name,
+            errorCode: "displayName",
+            setField: setName,
+            error,
+            description: "Name",
+          }}
+        >
+          <SignupFormInput />
+        </FormContext.Provider>
 
-        <div className="signupFormInput__container">
-          <span className="signupFormInput__description">Name</span>
-          <input
-            type="text"
-            className="signupForm__input name-input"
-            value={name}
-            onChange={(e) => {
-              setName(e.target.value);
-            }}
-          />
-        </div>
-
-        <div className="signupFormInput__container">
-          <span className="signupFormInput__description">Username</span>
-          <input
-            type="text"
-            className="signupForm__input username-input"
-            value={username}
-            onChange={(e) => {
-              setUsername(e.target.value);
-            }}
-          />
-        </div>
-
-        <div className="signupFormInput__container">
-          <span className="signupFormInput__description">Password</span>
-          <input
-            type="password"
-            className="signupForm__input password-input"
-            value={password}
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-          />
-        </div>
-
-        <div className="signupFormInput__container">
-          <span className="signupFormInput__description">
-            Password confirmation
-          </span>
-          <input
-            type="password"
-            className="signupForm__input password-input"
-            value={confirmPassword}
-            onChange={(e) => {
-              setConfirmPassword(e.target.value);
-            }}
-          />
-        </div>
+        <FormContext.Provider
+          value={{
+            field: username,
+            errorCode: "userName",
+            setField: setUsername,
+            error,
+            description: "Username",
+          }}
+        >
+          <SignupFormInput />
+        </FormContext.Provider>
+        <FormContext.Provider
+          value={{
+            field: password,
+            errorCode: "password",
+            setField: setPassword,
+            error,
+            description: "Password",
+          }}
+        >
+          <SignupFormInput />
+        </FormContext.Provider>
+        <FormContext.Provider
+          value={{
+            field: confirmPassword,
+            errorCode: "confirmPassword",
+            setField: setConfirmPassword,
+            error,
+            description: "Password confirmation",
+          }}
+        >
+          <SignupFormInput />
+        </FormContext.Provider>
         <Button
           className="signup__button submit-button"
           color="primary"
