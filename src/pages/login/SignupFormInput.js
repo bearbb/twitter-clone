@@ -4,15 +4,15 @@ import { FormContext } from "./FormContext";
 function SignupFormInput() {
   //check all field avail [email, name, username, password, confirmPassword]
   //check if error name === field name => light it up
-  const {
-    field,
-    fieldName: errorCode,
-    setField,
-    error,
-    description,
-  } = useContext(FormContext);
-  console.log(Object.keys(error)[0]);
-  //TODO: Check what happen when login
+  const { field, errorCode, setField, error, description } = useContext(
+    FormContext
+  );
+  let type;
+  if (errorCode === "password" || errorCode === "confirmPassword") {
+    type = "password";
+  } else {
+    type = "text";
+  }
   return (
     <div className="signupForm__container">
       <div
@@ -22,9 +22,8 @@ function SignupFormInput() {
       >
         <span className="signupFormInput__description">{description}</span>
         <input
-          type="email"
-          className={`signupForm__input ${description}-input`}
-          value={field}
+          type={`${type}`}
+          className={`signupForm__input`}
           onChange={(e) => {
             setField(e.target.value);
           }}

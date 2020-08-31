@@ -5,6 +5,7 @@ import SignupFormInput from "./SignupFormInput";
 import "./SignupNLogin.css";
 import axios from "axios";
 import { FormContext } from "./FormContext";
+import { useHistory } from "react-router-dom";
 axios.defaults.baseURL =
   "https://asia-east2-twitter-clone-53ba9.cloudfunctions.net/api";
 function Signup() {
@@ -14,7 +15,24 @@ function Signup() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState({});
+  const [buttonIsDisable, setButtonIsDisable] = useState(true);
+  const history = useHistory();
+  //Disable button when input is all empty
+  useEffect(() => {
+    if (
+      email !== "" &&
+      name !== "" &&
+      username !== "" &&
+      password !== "" &&
+      confirmPassword !== ""
+    ) {
+      setButtonIsDisable(false);
+    } else {
+      setButtonIsDisable(true);
+    }
+  }, [email, password, name, username, confirmPassword]);
   const signupSubmit = async () => {
+    //TODO: create a loading state
     try {
       const res = await axios.post("/signup", {
         email,
@@ -26,16 +44,13 @@ function Signup() {
       });
       console.log(res.data);
       //if there is no error => use react router dom to push to home
+      history.push("/");
     } catch (axiosError) {
       //if there is error => show error base on response in description
       console.log(axiosError.response.data.error);
       setError(axiosError.response.data.error);
     }
   };
-  useEffect(() => {
-    console.log(error);
-  }, [error]);
-
   return (
     <div className="signup">
       <TwitterIcon className="signup__twitterIcon twitterIcon"></TwitterIcon>
@@ -100,12 +115,15 @@ function Signup() {
           <SignupFormInput />
         </FormContext.Provider>
         <Button
-          className="signup__button submit-button"
+          className={`signup__button submit-button ${
+            buttonIsDisable && "disabled-button"
+          }`}
           color="primary"
           variant="contained"
           onClick={() => {
             signupSubmit();
           }}
+          disabled={buttonIsDisable}
         >
           Signup
         </Button>

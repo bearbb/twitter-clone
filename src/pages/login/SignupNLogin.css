@@ -103,3 +103,6 @@
 .container--error > span {
   color: #e0265f !important;
 }
+.disabled-button {
+  background-color: #b7bfe8 !important ;
+}
