@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import TwitterIcon from "@material-ui/icons/Twitter";
 import { Button } from "@material-ui/core";
+import ClipLoader from "react-spinners/ClipLoader";
 import axios from "axios";
 import "./SignupNLogin.css";
 import SignupFormInput from "./SignupFormInput";
@@ -12,6 +13,7 @@ function Login() {
   const [error, setError] = useState({});
   const history = useHistory();
   const [buttonIsDisable, setButtonIsDisable] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
   //Disable button when email and password is empty
   useEffect(() => {
     if (email !== "" && password !== "") {
@@ -22,6 +24,8 @@ function Login() {
     console.log(buttonIsDisable);
   }, [email, password]);
   const loginSubmit = async () => {
+    //while waiting for the token be return show a loading circle
+    setIsLogin(true);
     try {
       const res = await axios.post("/login", {
         email,
@@ -31,11 +35,13 @@ function Login() {
       //if login success => it will run code after this line
       //login success push to home page "/" with history
       console.log("%cLogin successfully", "color:pink");
+      setIsLogin(false);
       history.push("/");
     } catch (axiosError) {
       //check if dat error is about auth or the other one
       //if it is about auth change the error and set the error to null
       console.error(axiosError.response.data);
+      setIsLogin(false);
       setError(axiosError.response.data.error);
     }
   };
@@ -69,20 +75,28 @@ function Login() {
           >
             <SignupFormInput />
           </FormContext.Provider>
-          <Button
-            onClick={() => {
-              loginSubmit();
-            }}
-            className={`login__button submit-button ${
-              buttonIsDisable && "disabled-button"
-            }`}
-            color="primary"
-            variant="contained"
-            disableElevation
-            disabled={buttonIsDisable}
-          >
-            Login
-          </Button>
+          {isLogin ? (
+            <ClipLoader
+              loading={isLogin}
+              size={50}
+              className="isLoading"
+            ></ClipLoader>
+          ) : (
+            <Button
+              onClick={() => {
+                loginSubmit();
+              }}
+              className={`login__button submit-button ${
+                buttonIsDisable && "disabled-button"
+              }`}
+              color="primary"
+              variant="contained"
+              disableElevation
+              disabled={buttonIsDisable}
+            >
+              Login
+            </Button>
+          )}
         </form>
       </div>
     </div>

@@ -4,6 +4,7 @@ import Feed from "./layout/Feed/Feed.js";
 import Signup from "./pages/login/Signup";
 import Login from "./pages/login/Login";
 import { BrowserRouter as Router, Switch, Link, Route } from "react-router-dom";
+import Homeless from "./pages/Homeless/Homeless";
 function App() {
   return (
     <div className="app">
@@ -15,6 +16,7 @@ function App() {
 
           <Route path="/login" exact component={Login}></Route>
 
+          <Route path="/homeless" exact component={Homeless}></Route>
           <Route
             path="/post/:postId"
             exact

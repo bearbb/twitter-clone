@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import TwitterIcon from "@material-ui/icons/Twitter";
 import { Button } from "@material-ui/core";
+import ClipLoader from "react-spinners/ClipLoader";
 import SignupFormInput from "./SignupFormInput";
 import "./SignupNLogin.css";
 import axios from "axios";
@@ -17,6 +18,7 @@ function Signup() {
   const [error, setError] = useState({});
   const [buttonIsDisable, setButtonIsDisable] = useState(true);
   const history = useHistory();
+  const [isSigningUp, setIsSigningUp] = useState(false);
   //Disable button when input is all empty
   useEffect(() => {
     if (
@@ -32,8 +34,8 @@ function Signup() {
     }
   }, [email, password, name, username, confirmPassword]);
   const signupSubmit = async () => {
-    //TODO: create a loading state
     try {
+      setIsSigningUp(true);
       const res = await axios.post("/signup", {
         email,
         password,
@@ -44,10 +46,13 @@ function Signup() {
       });
       console.log(res.data);
       //if there is no error => use react router dom to push to home
+      setIsSigningUp(false);
       history.push("/");
     } catch (axiosError) {
       //if there is error => show error base on response in description
+      console.log(axiosError.response.data);
       console.log(axiosError.response.data.error);
+      setIsSigningUp(false);
       setError(axiosError.response.data.error);
     }
   };
@@ -114,19 +119,23 @@ function Signup() {
         >
           <SignupFormInput />
         </FormContext.Provider>
-        <Button
-          className={`signup__button submit-button ${
-            buttonIsDisable && "disabled-button"
-          }`}
-          color="primary"
-          variant="contained"
-          onClick={() => {
-            signupSubmit();
-          }}
-          disabled={buttonIsDisable}
-        >
-          Signup
-        </Button>
+        {isSigningUp ? (
+          <ClipLoader loading={isSigningUp} size={50} className="isLoading" />
+        ) : (
+          <Button
+            className={`signup__button submit-button ${
+              buttonIsDisable && "disabled-button"
+            }`}
+            color="primary"
+            variant="contained"
+            onClick={() => {
+              signupSubmit();
+            }}
+            disabled={buttonIsDisable}
+          >
+            Signup
+          </Button>
+        )}
       </form>
     </div>
   );
