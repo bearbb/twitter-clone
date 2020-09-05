@@ -28,7 +28,7 @@ function Post({ displayName, userName, verified, text, image, avatar }) {
             <p>{text}</p>
           </div>
         </div>
-        <img src={`${image}`} alt="" />
+        <img className="post__image" src={`${image}`} alt="" />
         <div className="post__footer">
           <ChatBubbleIcon fontSize="small" />
           <RepeatIcon fontSize="small" />

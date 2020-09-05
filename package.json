@@ -11,6 +11,7 @@
     "axios": "^0.20.0",
     "firebase": "^7.19.0",
     "react": "^16.13.1",
+    "react-cookie": "^4.0.3",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
@@ -18,7 +19,7 @@
     "react-twitter-embed": "^3.0.3"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "HTTPS=true SSL_CRT_FILE=./.cert/cert.pem SSL_KEY_FILE=./.cert/key.pem react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -38,5 +39,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://asia-east2-twitter-clone-53ba9.cloudfunctions.net/api"
+  "proxy": "https://asia-east2-twitter-clone-53ba9.cloudfunctions.net"
 }

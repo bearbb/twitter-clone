@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useCookies } from "react-cookie";
 import TwitterIcon from "@material-ui/icons/Twitter";
 import { Button } from "@material-ui/core";
 import ClipLoader from "react-spinners/ClipLoader";
@@ -14,6 +15,7 @@ function Login() {
   const history = useHistory();
   const [buttonIsDisable, setButtonIsDisable] = useState(true);
   const [isLogin, setIsLogin] = useState(false);
+  const [cookies, setCookie, removeCookie] = useCookies(["token"]);
   //Disable button when email and password is empty
   useEffect(() => {
     if (email !== "" && password !== "") {
@@ -27,6 +29,7 @@ function Login() {
     //while waiting for the token be return show a loading circle
     setIsLogin(true);
     try {
+      axios.defaults.withCredentials = true;
       const res = await axios.post("/login", {
         email,
         password,
@@ -34,15 +37,31 @@ function Login() {
       //login success return a token => store it somewhere
       //if login success => it will run code after this line
       //login success push to home page "/" with history
-      console.log("%cLogin successfully", "color:pink");
+      // removeCookie("authorization", {
+      //   domain: "https://asia-east2-twitter-clone-53ba9.cloudfunctions.net",
+      //   path: "/",
+      //   maxAge: 3600 * 30,
+      //   secure: true,
+      //   sameSite: "none",
+      //   // httpOnly: true,
+      // });
+      // console.log("%cLogin successfully", "color:pink");
+      // setCookie("authorization", `Bearer ${res.data.accessToken}`, {
+      //   domain: "https://asia-east2-twitter-clone-53ba9.cloudfunctions.net",
+      //   path: "/",
+      //   maxAge: 3600 * 30,
+      //   secure: true,
+      //   sameSite: "none",
+      //   // httpOnly: true,
+      // });
       setIsLogin(false);
       history.push("/");
     } catch (axiosError) {
       //check if dat error is about auth or the other one
       //if it is about auth change the error and set the error to null
-      console.error(axiosError.response.data);
+      console.error(axiosError.response);
       setIsLogin(false);
-      setError(axiosError.response.data.error);
+      // setError(axiosError.response.data.error);
     }
   };
   return (

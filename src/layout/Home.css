@@ -1,0 +1,9 @@
+.home__container {
+  display: flex;
+}
+.home__sidebar {
+  flex: 0.2;
+}
+.home__feed {
+  flex: 0.6;
+}

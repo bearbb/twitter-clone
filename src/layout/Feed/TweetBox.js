@@ -1,30 +1,29 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import "./TweetBox.css";
 import { Button, Avatar } from "@material-ui/core";
-import db from "../../firebase";
+import { UserContext } from "../UserContext";
+import axios from "axios";
 function TweetBox() {
   const [tweetMessage, setTweetMessage] = useState("");
   const [tweetImage, setTweetImage] = useState("");
-  const tweet = (e) => {
-    e.preventDefault();
-    db.collection("posts").add({
-      displayName: "Hooper in the hood",
-      userName: "hooper",
-      verified: false,
-      avatar:
-        "https://ih1.redbubble.net/image.973946953.0625/flat,750x1000,075,f.jpg",
-      text: tweetMessage,
-      image: tweetImage,
-      createAt: `${new Date().toISOString()}`,
-    });
-    setTweetImage("");
-    setTweetMessage("");
+  const userData = useContext(UserContext);
+  console.log(userData);
+  const tweet = async () => {
+    try {
+      const res = await axios.post("/tweet", {
+        text: tweetMessage,
+        image: tweetImage,
+      });
+      console.log(res);
+    } catch (err) {
+      console.error(err);
+    }
   };
   return (
     <div className="tweetBox">
       <form>
         <div className="tweetBox__input">
-          <Avatar src="https://images-na.ssl-images-amazon.com/images/I/51AG6B5vv7L._AC_SX425_.jpg"></Avatar>
+          <Avatar src={userData.avatar} />
           <input
             type="text"
             placeholder="What're u doing"

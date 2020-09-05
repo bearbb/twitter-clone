@@ -5,12 +5,13 @@ import Signup from "./pages/login/Signup";
 import Login from "./pages/login/Login";
 import { BrowserRouter as Router, Switch, Link, Route } from "react-router-dom";
 import Homeless from "./pages/Homeless/Homeless";
+import Home from "./layout/Home";
 function App() {
   return (
     <div className="app">
       <Router>
         <Switch>
-          <Route path="/" exact component={Feed}></Route>
+          <Route path="/" exact component={Home}></Route>
 
           <Route path="/signup" exact component={Signup}></Route>
 

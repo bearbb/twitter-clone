@@ -25,7 +25,7 @@
 }
 .homeless__button {
   width: auto;
-  border: 1px solid black !important;
   border-radius: 10px !important;
   height: 37px !important;
+  text-transform: none !important;
 }

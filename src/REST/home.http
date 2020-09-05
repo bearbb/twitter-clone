@@ -1,1 +1,4 @@
-GET https://asia-east2-twitter-clone-53ba9.cloudfunctions.net/api/home
+GET https://asia-east2-twitter-clone-53ba9.cloudfunctions.net/api/posts
+###
+
+GET https://asia-east2-twitter-clone-53ba9.cloudfunctions.net/api/user/bearbb
