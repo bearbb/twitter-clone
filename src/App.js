@@ -6,6 +6,10 @@ import Login from "./pages/login/Login";
 import { BrowserRouter as Router, Switch, Link, Route } from "react-router-dom";
 import Homeless from "./pages/Homeless/Homeless";
 import Home from "./layout/Home";
+import axios from "axios";
+axios.defaults.baseURL =
+  "https://asia-east2-twitter-clone-53ba9.cloudfunctions.net/api";
+axios.defaults.withCredentials = true;
 function App() {
   return (
     <div className="app">

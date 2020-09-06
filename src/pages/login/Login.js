@@ -15,7 +15,7 @@ function Login() {
   const history = useHistory();
   const [buttonIsDisable, setButtonIsDisable] = useState(true);
   const [isLogin, setIsLogin] = useState(false);
-  const [cookies, setCookie, removeCookie] = useCookies(["token"]);
+  // const [cookies, setCookie, removeCookie] = useCookies(["token"]);
   //Disable button when email and password is empty
   useEffect(() => {
     if (email !== "" && password !== "") {
@@ -23,13 +23,12 @@ function Login() {
     } else {
       setButtonIsDisable(true);
     }
-    console.log(buttonIsDisable);
+    // console.log(buttonIsDisable);
   }, [email, password]);
   const loginSubmit = async () => {
     //while waiting for the token be return show a loading circle
     setIsLogin(true);
     try {
-      axios.defaults.withCredentials = true;
       const res = await axios.post("/login", {
         email,
         password,

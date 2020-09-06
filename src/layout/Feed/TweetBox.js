@@ -7,14 +7,14 @@ function TweetBox() {
   const [tweetMessage, setTweetMessage] = useState("");
   const [tweetImage, setTweetImage] = useState("");
   const userData = useContext(UserContext);
-  console.log(userData);
+  // console.log(userData);
   const tweet = async () => {
     try {
       const res = await axios.post("/tweet", {
         text: tweetMessage,
         image: tweetImage,
       });
-      console.log(res);
+      // console.log(res);
     } catch (err) {
       console.error(err);
     }

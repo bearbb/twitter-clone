@@ -7,8 +7,6 @@ import "./SignupNLogin.css";
 import axios from "axios";
 import { FormContext } from "./FormContext";
 import { useHistory } from "react-router-dom";
-axios.defaults.baseURL =
-  "https://asia-east2-twitter-clone-53ba9.cloudfunctions.net/api";
 function Signup() {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
