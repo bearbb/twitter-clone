@@ -27,40 +27,19 @@ function Login() {
   }, [email, password]);
   const loginSubmit = async () => {
     //while waiting for the token be return show a loading circle
-    setIsLogin(true);
     try {
       const res = await axios.post("/login", {
         email,
         password,
       });
-      //login success return a token => store it somewhere
-      //if login success => it will run code after this line
-      //login success push to home page "/" with history
-      // removeCookie("authorization", {
-      //   domain: "https://asia-east2-twitter-clone-53ba9.cloudfunctions.net",
-      //   path: "/",
-      //   maxAge: 3600 * 30,
-      //   secure: true,
-      //   sameSite: "none",
-      //   // httpOnly: true,
-      // });
-      // console.log("%cLogin successfully", "color:pink");
-      // setCookie("authorization", `Bearer ${res.data.accessToken}`, {
-      //   domain: "https://asia-east2-twitter-clone-53ba9.cloudfunctions.net",
-      //   path: "/",
-      //   maxAge: 3600 * 30,
-      //   secure: true,
-      //   sameSite: "none",
-      //   // httpOnly: true,
-      // });
       setIsLogin(false);
+      console.log(res.data);
+      //if login successfully then push to home page
       history.push("/");
-    } catch (axiosError) {
-      //check if dat error is about auth or the other one
-      //if it is about auth change the error and set the error to null
-      console.error(axiosError.response);
+    } catch (axiosErr) {
+      console.error(axiosErr.response.data.error);
+      setError(axiosErr.response.data.error);
       setIsLogin(false);
-      // setError(axiosError.response.data.error);
     }
   };
   return (
@@ -69,6 +48,11 @@ function Login() {
         <TwitterIcon className="login__twitterIcon twitterIcon"></TwitterIcon>
         <form className="login__form">
           <h2 className="loginForm__header">Login to your account</h2>
+          {Object.keys(error)[0] === "credential" && (
+            <span className="error-description">
+              Credential: Wrong credentials, pls try again
+            </span>
+          )}
           {/* email input */}
           <FormContext.Provider
             value={{
@@ -120,5 +104,4 @@ function Login() {
     </div>
   );
 }
-
 export default Login;
