@@ -22,7 +22,6 @@ function Home() {
       try {
         setIsFetchingLoggedInStatus(true);
         const res = await axios.get("/isLoggedIn", { withCredentials: true });
-        console.log(res.data.isLoggedIn);
         setIsLoggedIn(res.data.isLoggedIn);
         if (res.data.isLoggedIn === false) {
           history.push("/homeless");

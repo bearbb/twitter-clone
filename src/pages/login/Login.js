@@ -33,11 +33,9 @@ function Login() {
         password,
       });
       setIsLogin(false);
-      console.log(res.data);
       //if login successfully then push to home page
       history.push("/");
     } catch (axiosErr) {
-      console.error(axiosErr.response.data.error);
       setError(axiosErr.response.data.error);
       setIsLogin(false);
     }
