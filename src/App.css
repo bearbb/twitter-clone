@@ -1,6 +1,8 @@
 body {
   --twitter-color: #50b7f5;
   --twitter-background: #e6ecf0;
+
+  background-color: white;
 }
 .app {
   display: flex;
@@ -9,5 +11,4 @@ body {
   margin-left: auto;
   margin-right: auto;
   padding: 0 10px;
-  background-color: white;
 }

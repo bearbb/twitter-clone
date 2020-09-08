@@ -38,7 +38,7 @@ export const sinceThen = (date) => {
             return `${parseInt(timeSinceThen)}d`;
           }
         } else {
-          return `${parseInt(timeSinceThen)}d`;
+          return `${parseInt(timeSinceThen)}h`;
         }
       } else {
         return `${parseInt(timeSinceThen)}m`;

@@ -50,6 +50,10 @@ function Feed() {
           text,
           image,
           createAt,
+          postId,
+          likeCount,
+          tweetCount,
+          retweetCount,
         }) => (
           <Post
             displayName={displayName}
@@ -59,6 +63,10 @@ function Feed() {
             text={text}
             image={image}
             sinceThen={sinceThen(createAt)}
+            postId={postId}
+            likeCount={likeCount}
+            tweetCount={tweetCount}
+            retweetCount={retweetCount}
           />
         )
       )}
