@@ -138,6 +138,14 @@ function Post({
       console.error(err);
     }
   };
+  const retweet = async () => {
+    try {
+      const res = await axios.post(`/post/${postId}/retweet`, { content: "" });
+      res.data && setRetweetCountState(retweetCountState + 1);
+    } catch (err) {
+      console.error(err);
+    }
+  };
   return (
     <div className="post">
       <div className="post__avatar">
@@ -190,7 +198,12 @@ function Post({
             ></PopupPost>
           </Popup>
           <div className="retweet__container tweetButton__container">
-            <span className="tweet__button retweet-button" onClick={() => {}}>
+            <span
+              className="tweet__button retweet-button"
+              onClick={() => {
+                retweet();
+              }}
+            >
               <RepeatIcon fontSize="small" />
             </span>
             {retweetCountState}
