@@ -1,0 +1,87 @@
+.PopupQuoteTweetContainer {
+  background-color: white;
+  border-radius: 15px;
+  min-width: 568px;
+}
+.quoteTweetContainer {
+  display: flex;
+  padding: 0 15px 0 15px;
+  flex-grow: 1;
+  /* border-bottom: 1px solid rgba(0, 0, 0, 0.25); */
+  padding-bottom: 10px;
+}
+
+.quoteTweetAvatar__container {
+  padding-top: 5px;
+}
+.quoteTweetPost__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  flex: 1;
+}
+.quoteTweetPost__container > .stupidContainer > input {
+  margin: 12px;
+  border: none;
+}
+.quoteTweetPost {
+  border: none !important;
+}
+.miniPost {
+  padding: none;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+.miniPost__header {
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  border-bottom: none;
+}
+.miniPost__header-noImg {
+  border: 1px solid rgba(0, 0, 0, 0.25) !important;
+  border-radius: 10px;
+}
+.miniPostHeader__0 {
+  display: flex;
+  margin: 10px 10px 5px 10px;
+}
+.displayName {
+  font-weight: 600;
+  margin-right: 4px;
+}
+.miniPost__body {
+  display: flex;
+  flex-direction: column;
+}
+.miniPost__header > p {
+  margin: 0px 10px 10px 10px;
+}
+.miniPost__body > img {
+  max-width: 506px;
+  max-height: 506px;
+  object-fit: cover;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.miniPost__avatar {
+  height: 20px !important;
+  width: 20px !important;
+  margin-right: 3px !important;
+}
+.retweetBar {
+  height: 50px;
+  display: flex;
+  justify-content: flex-end;
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
+  margin-top: 26px;
+}
+.retweetBar > button {
+  height: 37px !important;
+  align-self: flex-end;
+  text-transform: none !important;
+  border-radius: 9999px;
+}

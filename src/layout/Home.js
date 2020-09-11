@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Feed from "./Feed/Feed";
 import Sidebar from "./Sidebar/Sidebar";
-import { UserContext } from "./UserContext";
+import { PostWithoutExtension } from "./Feed/PopupQuoteTweet";
+import { withUserContext, UserContext } from "./UserContext";
 import "./Home.css";
 import axios from "axios";
 function Home() {
@@ -33,6 +34,7 @@ function Home() {
               const res = await axios.get("/user", { withCredentials: true });
               // console.log(res.data);
               setUserData(res.data);
+              withUserContext(PostWithoutExtension, userData);
               setIsFetchingUserData(false);
             } catch (err) {
               setIsFetchingUserData(false);

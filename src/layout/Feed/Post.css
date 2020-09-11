@@ -116,7 +116,6 @@
 }
 
 .popup__closeButton:hover {
-  background-color: var(--twitter-background);
   color: var(--twitter-color);
 }
 
