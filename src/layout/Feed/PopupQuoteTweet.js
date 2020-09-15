@@ -5,6 +5,7 @@ import VerifiedUserIcon from "@material-ui/icons/VerifiedUser";
 import Avatar from "@material-ui/core/Avatar";
 import { Button } from "@material-ui/core";
 import { UserContext } from "../UserContext";
+import BarLoader from "react-spinners/BarLoader";
 import "./PopupQuoteTweet.css";
 export const PostWithoutExtension = ({
   displayName,
@@ -72,7 +73,7 @@ function PopupQuoteTweet({
     }
   };
   return (
-    <div className="PopupQuoteTweetContainer">
+    <div className={`PopupQuoteTweetContainer`}>
       <div className="closeBar popupCloseButton__container">
         <span
           className="closeButton closeBar__icon popup__closeButton"
@@ -83,6 +84,7 @@ function PopupQuoteTweet({
           <CloseIcon></CloseIcon>
         </span>
       </div>
+      {isRetweeting && <BarLoader width="100%" color="#3f51b5"></BarLoader>}
       <div className="quoteTweetContainer">
         <div className="quoteTweetAvatar__container">
           <Avatar src={avatar}></Avatar>

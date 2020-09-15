@@ -4,7 +4,8 @@ import VerifiedUserIcon from "@material-ui/icons/VerifiedUser";
 import Avatar from "@material-ui/core/Avatar";
 import ChatBubbleIcon from "@material-ui/icons/ChatBubbleOutline";
 import RepeatIcon from "@material-ui/icons/Repeat";
-import FavoriteIcon from "@material-ui/icons/FavoriteBorder";
+import FavoriteIconBorder from "@material-ui/icons/FavoriteBorder";
+import FavoriteIcon from "@material-ui/icons/Favorite";
 import PublishIcon from "@material-ui/icons/Publish";
 import Popup from "reactjs-popup";
 import axios from "axios";
@@ -22,18 +23,20 @@ function Post({
   likeCount,
   tweetCount,
   retweetCount,
+  isLiked,
 }) {
   const [replyIsClose, setReplyIsClose] = useState(true);
   const [quoteTweetIsClose, setQuoteTweetIsClose] = useState(true);
-  const [isLiked, setIsLiked] = useState(false);
   const [likeCountState, setLikeCountState] = useState(likeCount);
   const [tweetCountState, setTweetCountState] = useState(tweetCount);
   const [retweetCountState, setRetweetCountState] = useState(retweetCount);
+  const [liked, setLiked] = useState(isLiked);
   const likeTweet = async () => {
     try {
       const res = await axios.post(`/post/${postId}/like`);
       console.log(res.data);
       setLikeCountState(res.data.likeCount);
+      setLiked(true);
     } catch (err) {
       console.error(err);
     }
@@ -139,7 +142,13 @@ function Post({
                 likeTweet();
               }}
             >
-              <FavoriteIcon fontSize="small" />
+              {liked ? (
+                <span className="filledFavoriteButton">
+                  <FavoriteIcon fontSize="small" />
+                </span>
+              ) : (
+                <FavoriteIconBorder fontSize="small" />
+              )}
             </span>
             {likeCountState}
           </div>

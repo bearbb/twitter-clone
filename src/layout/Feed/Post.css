@@ -74,6 +74,9 @@
 .like__container:hover {
   color: #fa4343;
 }
+.filldedFavoriteButton {
+  color: #fa4343;
+}
 .retweet__container:hover > .retweet-button {
   background-color: #d6f2d8;
 }
